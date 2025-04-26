@@ -9,7 +9,7 @@ export function CharacterPopup({ character }: { character: Character }) {
       <div className="col-span-1 flex items-center justify-center">
         <img
           src={character.imageSrc}
-          alt={character.displayName}
+          alt={character.name}
           className="w-full max-w-[250px] aspect-square rounded-full object-cover border-2 border-gray-200"
         />
       </div>
@@ -17,17 +17,20 @@ export function CharacterPopup({ character }: { character: Character }) {
       {/* Øverst til høyre (navn og rolle) */}
       <div className="col-span-2 flex flex-col justify-center items-center">
         <h2 className="text-3xl font-bold text-gray-900 text-center">
-          {character.displayName || "Navn Ukjent"}
+          {character.name || "Navn Ukjent"}
         </h2>
         <span className="mt-2 text-base font-semibold text-gray-600">
           {character.role}
+        </span>
+        <span className="mt-2 text-base font-semibold text-gray-600">
+          {character.yrke}
         </span>
       </div>
 
       {/* Nederst til høyre (beskrivelse) */}
       <div className="col-span-1 overflow-auto">
         <p className="text-gray-700 whitespace-pre-line text-center">
-          {character.description}
+          {character.bio}
         </p>
       </div>
 
