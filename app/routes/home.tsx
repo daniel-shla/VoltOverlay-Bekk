@@ -22,6 +22,11 @@ export default function Home() {
         </div>
       </div>
       <div className="absolute right-10 bottom-10">
+      <ButtonWithIcon
+          text="Hard"
+          onClick={() => navigate("/hard")}
+          icon={<QuestionMarkIcon />}
+        />
         <ButtonWithIcon
           text="Hjelp"
           onClick={() => navigate("/hjelp")}
