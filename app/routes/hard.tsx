@@ -7,7 +7,7 @@ import nrk from "app/assets/nrk.mp4"
 export function meta({}: Route.MetaArgs) {
   return [{ title: "Video Player" }];
 }
-//absolute top-0 left-0 w-full h-full bg-black bg-opacity-40 backdrop-blur-sm flex flex-col items-center justify-center text-white
+
 export default function Hard() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [paused, setPaused] = useState(false);
@@ -121,7 +121,7 @@ export default function Hard() {
 
         {paused && (
           <div className="absolute inset-0 pointer-events-auto">
-            <div className="absolute inset-0 bg-black opacity-69"></div>
+            <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
             
             {/* Main pause content */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -147,7 +147,7 @@ export default function Hard() {
             {/* Character popup - shows when a character is selected */}
             {selectedCharacter && (
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 max-w-xl max-h-[70vh] overflow-auto">
-                <div className="relative">
+                <div className="relative bg-black/70 backdrop-blur-lg rounded-xl p-6 text-white">
                   <button 
                     onClick={() => setSelectedCharacter(null)}
                     className="absolute top-2 right-2 bg-black bg-opacity-40 rounded-full p-1 text-white hover:bg-opacity-60"
