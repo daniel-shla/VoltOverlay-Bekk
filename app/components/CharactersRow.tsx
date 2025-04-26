@@ -68,3 +68,5 @@ export default function CharactersRow({
     </div>
   );
 }
+
+export { characters } from "../data/characters";
