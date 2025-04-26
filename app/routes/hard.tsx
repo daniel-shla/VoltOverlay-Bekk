@@ -6,7 +6,7 @@ import nrk from "app/assets/nrk.mp4"
 export function meta({}: Route.MetaArgs) {
   return [{ title: "Harddd!" }];
 }
-
+//absolute top-0 left-0 w-full h-full bg-black bg-opacity-40 backdrop-blur-sm flex flex-col items-center justify-center text-white
 export default function Hard() {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [paused, setPaused] = useState(false);
@@ -32,9 +32,8 @@ export default function Hard() {
             onPlay={handlePlay}
             onPause={handlePause}
           />
-
             {paused && (
-                <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-white rounded-lg">
+                <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40 backdrop-blur-sm flex flex-col items-center justify-center text-white">
 
                     <h2 className="text-2xl font-bold mb-4">Paused 🎬</h2>
                     <button
