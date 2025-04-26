@@ -1,0 +1,279 @@
+{
+  "segments": [
+    {
+      "title": "News Monologue",
+      "timeStart": "0:45",
+      "timeEnd": "3:00",
+      "topics": [
+        {
+          "theme": "Antibiotika-resistens",
+          "question": "En viktig sak hvor norske kyr har blitt smittet av antibiotikaresistente bakterier. Hva er konsekvensene av dette for landbruket og helsesystemet?"
+        },
+        {
+          "theme": "Julekalender",
+          "question": "Erna Solberg åpner første luke. Hvordan fungerer julekalendere i Norge, og hva kan de fortelle oss om kultur og tradisjoner?"
+        },
+        {
+          "theme": "Krisemøte og alkohol",
+          "question": "Politiet besøker statsministerens krisemøte og oppdager en overraskende mengde alkohol. Hva er bakgrunnen for slike møter, og hva innebærer det for våre ledere?"
+        }
+      ]
+    },
+    {
+      "title": "Politics",
+      "timeStart": "3:00",
+      "timeEnd": "10:00",
+      "topics": [
+        {
+          "theme": "Regjeringsforhandlinger",
+          "question": "Venstre og KrF bryter forhandlingene. Erna Solberg omtaler situasjonen som mer en \"samtaleterapi\" enn faktiske forhandlinger. Hva er konsekvensene av dette bruddet for den politiske situasjonen i Norge?"
+        },
+        {
+          "theme": "Politisk miljødebatt",
+          "question": "Diskusjon om hvordan det er vanskelig å gjennomføre reell miljøpolitikk med FRP i regjeringen. Hva innebærer dette for fremtidige miljøtiltak og samarbeid?"
+        },
+        {
+          "theme": "Dansk politikk",
+          "question": "Referanser til Søren Pind og dansk utenrikspolitikk. Hvorfor er det viktig å inkludere dansk-svenske nyheter, og hvordan påvirker dette Norges politiske landscape?"
+        },
+        {
+          "theme": "Fidel Castros død",
+          "question": "Diskusjoner om arv og innvirkning av Fidel Castro. Var han en diktator eller en frihetskjemper? Hva betyr hans død for Cuba og den internasjonale politikken?"
+        },
+        {
+          "theme": "Kubaneres reaksjoner",
+          "question": "Jubel i Miami etter Castros død, som illustrerer de delte meninger om hans regime. Hvordan påvirker dette forholdet mellom Cuba og USA?"
+        },
+        {
+          "theme": "Generell politisk usikkerhet",
+          "question": "Kommentaren om at ingen vil styre landet, og sammenligningen med det norske fotballandslaget. Hvordan arbeider partiene i en politisk situasjon som oppleves som kaotisk og uoversiktlig?"
+        }
+      ]
+    },
+    {
+      "title": "Immigrasjon",
+      "timeStart": "10:00",
+      "timeEnd": "15:00",
+      "topics": [
+        {
+          "theme": "Sylvie Listhaug sin innvandringspolitikk",
+          "question": "Innvandrings- og integreringsministeren får kritikk for å delta i en aksjon med politiet for å identifisere ulovlige innvandrere. Hvilke konsekvenser har denne tilnærmingen for innvandringspolitikken i Norge?"
+        },
+        {
+          "theme": "Media og PR",
+          "question": "Er det strategisk å gå ut på \"jakt\" etter innvandrere for å skape oppmerksomhet? Hvordan kan rådgivere påvirke politiske beslutninger og offentlig bilde?"
+        },
+        {
+          "theme": "Kritisk refleksjon",
+          "question": "Diskusjonen rundt politiets metoder på letingen etter innvandrere. Hva sier dette om forholdet mellom politiets oppgaver og offentlighetens oppfatning?"
+        },
+        {
+          "theme": "Økonomiske konsekvenser",
+          "question": "Er det realistisk å kaste ut alle illegale innvandrere, og hva vil det koste samfunnet? Bør man vurdere de positive bidragene fra innvandrere?"
+        },
+        {
+          "theme": "Polarisering av debatten",
+          "question": "Ingebrigth Sten Jensen kritiserer Sylvies metode og sammenligner den med historiske urettferdigheter. Hvordan vil slike sammenligninger påvirke den offentlige debatten om innvandring?"
+        },
+        {
+          "theme": "Medienes rolle",
+          "question": "Hvordan påvirker mediedekningen av Sylvie Listhaug hennes muligheter til å sette sitt preg på integreringsdebatten? Er debatten hovedfokus i jobben hennes, eller er det en avsporing av det egentlige målet?"
+        }
+      ]
+    },
+    {
+      "title": "Kvikkass",
+      "timeStart": "15:00",
+      "timeEnd": "17:00",
+      "topics": [
+        {
+          "theme": "Kvikkass",
+          "question": "Et firma fått mye oppmerksomhet for problemer med distribusjon av lørdagsaviser i distriktene. Hva er konsekvensene av å sette distribusjonen ut på anbud?"
+        },
+        {
+          "theme": "Avisdistribusjon",
+          "question": "Hvorfor er det utfordrende at lørdagsavisene ikke når frem til abonnentene? Hva er innvirkningen på leserne og lokalsamfunnene?"
+        },
+        {
+          "theme": "Politisk ansvar",
+          "question": "Ansvaret for distribusjonen ligger hos Solvik-Olsen og hans departement. Hvordan kan politiske beslutninger påvirke hverdagen for folk i distriktene?"
+        },
+        {
+          "theme": "Kvalitet vs. kostnad",
+          "question": "Diskusjon om at det er viktigere å levere avisene billig, men hva skjer med kvaliteten og påliteligheten?"
+        },
+        {
+          "theme": "Sosiale konsekvenser",
+          "question": "Hva skjer med samfunnsengasjementet når lokale medier ikke når ut? Hvordan bidrar aviser til informasjon og debatt i lokalsamfunn?"
+        },
+        {
+          "theme": "Filosofering over avisens verdi",
+          "question": "Er lørdagsavisene viktige for folk i distriktene? Om et tre faller i skogen, har det skjedd noe i den større sammenhengen? Hvordan påvirker slike spørsmål debatten om medienes rolle?"
+        }
+      ]
+    },
+    {
+      "title": "Skole & språk",
+      "timeStart": "17:00",
+      "timeEnd": "19:00",
+      "topics": [
+        {
+          "theme": "Norskundervisning",
+          "question": "Diskusjonen om hvordan norskundervisningen i skolen oppleves som for teoretisk. Hva kan gjøres for å gjøre faget mer engasjerende for elevene?"
+        },
+        {
+          "theme": "Kritikk av lærebøker",
+          "question": "NRKs litteraturjournalist Knut H.M.s sønn klager over lærebokas kompleksitet. Hva sier dette om kvaliteten på lærematerialet og dets relevans for unge studenter?"
+        },
+        {
+          "theme": "Foreldrenes rolle",
+          "question": "Hvordan påvirker foreldres tilnærming til litteratur og læring barna? Hva er balansen mellom å gi støtte og la dem navigere sine egne utfordringer med skolen?"
+        },
+        {
+          "theme": "Alternativer til klassisk litteratur",
+          "question": "Forslag om å introdusere alternativer som dansk for å vekke interessen. Hvordan kan variasjon i leseopplevelser forbedre barnas engasjement?"
+        },
+        {
+          "theme": "Humoristisk refleksjon",
+          "question": "Bruken av humor i å beskrive en generasjonskløft og hvordan utdanningsmetodene har endret seg. Hvordan kan humor brukes som verktøy for å diskutere utdanningsutfordringer?"
+        },
+        {
+          "theme": "Leseferdigheter og strategier",
+          "question": "Diskusjonen om at ungdomsskoleelever ikke forstår begreper som \"lesestrategi\". Hvordan kan lærere og skoler tilpasse undervisningen for å møte elevenes behov bedre?"
+        }
+      ]
+    },
+    {
+      "title": "Museum & helse",
+      "timeStart": "19:00",
+      "timeEnd": "22:00",
+      "topics": [
+        {
+          "theme": "Destruksjon av utstoppede dyr",
+          "question": "Stavanger museum skal destruere gamle utstoppede dyr på grunn av høyt arsenikkinnhold. Hva betyr dette for museumskulturen og bevaring av dyremateriale?"
+        },
+        {
+          "theme": "Kulturelle referanser",
+          "question": "Humoristiske betraktninger om innholdet i julemiddagen i Stavanger og hva som kan overtale folk til å spise tradisjonell mat. Hvordan spiller kulturelle kontekster inn i diskusjonen?"
+        },
+        {
+          "theme": "Farlige materialer i museer",
+          "question": "Diskusjonen om hvorvidt gamle utstoppede dyr kan være farlige for den moderne befolkningen. Hvordan håndteres sikkerhet i bevaring av kulturelle artefakter?"
+        },
+        {
+          "theme": "Folkets forhold til museer",
+          "question": "Hvordan opplever folk i Stavanger sin lokale museumskultur, og hva betyr det at en så kjent institusjon nå må ta slike tiltak?"
+        },
+        {
+          "theme": "Humor og satire",
+          "question": "Bruken av humor for å belyse absurde situasjoner, som dyr som truer liv og helse hundre år etter sin død. Hvordan kan humor fungere som en sosial kommentar til alvorlige temaer?"
+        },
+        {
+          "theme": "Psykologisk og samfunnsmessig refleksjon",
+          "question": "Hva sier dette om vår oppfatning av døde dyr og historie i offentlige rom? Hvordan måler samfunnet sitt forhold til fortiden versus nåtiden?"
+        }
+      ]
+    },
+    {
+      "title": "Internasjonalt",
+      "timeStart": "22:00",
+      "timeEnd": "25:00",
+      "topics": [
+        {
+          "theme": "Reaksjoner i USA",
+          "question": "Det spekuleres i om grunnen til at USA angrer på at de ikke ga Jon Almås flere sjanser i løpet av hans tid der på 90-tallet, kanskje med henblikk på hvordan dagens politiske klima har endret seg. Hva sier dette om forholdet mellom underholdning og politikk?"
+        },
+        {
+          "theme": "Moskva og vodka-reklame",
+          "question": "Det legges merke til at Almås har hatt noe annet enn vann i glasset under programmene sine, og dette får oppmerksomhet i Russland. Hvordan påvirker dette hans omdømme og fremtidige muligheter i Russland?"
+        },
+        {
+          "theme": "Jon Almås' popularitet",
+          "question": "Det uttrykkes beundring for Jon Almås, inkludert hans ferdigheter som underholder. Hva gjør ham til en så populær figur i både Norge og internasjonalt?"
+        },
+        {
+          "theme": "Kulturell forståelse",
+          "question": "Diskusjoner om hvordan Almås er oppfattet i Russland versus Norge, og hvordan humor og kultur kan variere fra sted til sted. Hvordan påvirker kulturelle ulikheter oppfatningen av en komiker?"
+        },
+        {
+          "theme": "Personlige anekdoter",
+          "question": "Referanser til spesifikke episoder fra hans programmer og betydningen av dem for seerne i Norge. Hvordan skaper slike minner en personlig tilknytning til programmet?"
+        },
+        {
+          "theme": "Fremtidige muligheter",
+          "question": "Spekulasjoner om hva Jon Almås' karrierevei kan innebære nå, inkludert muligheten for nyheter fra en pro-kremlin synsvinkel. Hvordan vil dette påvirke hans arbeid og mottakelse av publikum?"
+        }
+      ]
+    },
+    {
+      "title": "Ordoppgave",
+      "timeStart": "25:00",
+      "timeEnd": "27:00",
+      "topics": [
+        {
+          "theme": "Ordoppgave",
+          "question": "Deltakerne skal gjette et nytt ord basert på oppgitte ledetråder (seddel, miljø, fett, mulla, dyre). Hvordan kan ordspill og kreative utfordringer bidra til underholdning og engasjement?"
+        },
+        {
+          "theme": "Kreativ språkbruk",
+          "question": "Forsøk på å lage nye ord med humoristiske konnotasjoner, som \"dyrefettseddel\" og \"fettmiljø\". Hva sier dette om språkutvikling og lek med ord i humoristiske sammenhenger?"
+        },
+        {
+          "theme": "Sosiale temaer",
+          "question": "Diskusjoner om mobbing og hvordan ord kan brukes på en positiv måte i kampanjer. Kan \"fettmiljø\" bidra til å normalisere positive kroppsbilder og redusere stigma?"
+        },
+        {
+          "theme": "Lek med konnotasjoner",
+          "question": "Humoristiske forslag til hva de foreslåtte ordene kan bety, som \"lommebok\" og \"gatekjøkken\". Hvordan kan slike kreative tilnærminger bidra til å skape ny humor og perspektiver?"
+        },
+        {
+          "theme": "Konkurranse og samarbeid",
+          "question": "Deltakerne jobber sammen for å finne det riktige svaret. Hvordan kan lagarbeid og lek i form av ordspill styrke båndene mellom deltakerne og engasjere seerne?"
+        }
+      ]
+    },
+    {
+      "title": "Avslutning",
+      "timeStart": "27:00",
+      "timeEnd": "37:00",
+      "topics": [
+        {
+          "theme": "Avskjed med programmet",
+          "question": "Deltakerne og programlederen forbereder seg på avslutningen av Nytt på Nytt. Hva betyr dette for seerne, og hvordan markerer programmet overgangen til en ny fase?"
+        },
+        {
+          "theme": "Hedersplakett",
+          "question": "Guri Skavlan, prosjektleder for programmet, får anerkjennelse for sitt arbeid. Hvordan har hennes innsats formet programmet, og hva har hun betydd for teamet?"
+        },
+        {
+          "theme": "Humor og letthet",
+          "question": "Bruken av humor når temaet om eldre sedler og dyrefett kommer opp. Hvordan bidrar humor til å skape en lett atmosfære selv når det er tid for avskjed?"
+        },
+        {
+          "theme": "Takknemlighet",
+          "question": "Programlederen uttrykker takknemlighet overfor kolleger og seere for deres støtte gjennom årene. Hvordan kan slike bølger av takknemlighet kartlegge verdien av teamwork og fellesskap?"
+        },
+        {
+          "theme": "Overgang til ny leder",
+          "question": "Introduksjonen av Bård Tufte Johansen som ny programleder. Hvordan kan en ny leder bringe friske perspektiver til et veletablert program?"
+        },
+        {
+          "theme": "Refleksjoner over fremtiden",
+          "question": "Behovet for refleksjon i forbindelse med endringer. Hva kan seerne forvente fra programmet fremover, og hvordan kan de nye utviklingene påvirke innholdet?"
+        }
+      ]
+    }
+  ],
+  "placeholderDescriptions": [
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam lacinia malesuada urna, et mollis ipsum dictum et. Fusce eu lorem vel nisi finibus tempor.",
+    "Phasellus consequat arcu at justo pellentesque, ac commodo justo lobortis. Vestibulum vel odio eu magna feugiat consectetur. Cras ornare tempus quam.",
+    "Maecenas vitae erat in lorem ultricies porttitor. Donec tempor libero nec diam venenatis, vel lacinia massa vulputate. Proin egestas magna non dolor.",
+    "Etiam feugiat nibh in dui molestie, vel fermentum nunc venenatis. Nulla facilisi. Cras venenatis justo vel orci cursus, non sagittis metus tincidunt.",
+    "Suspendisse potenti. Ut efficitur arcu eget nisi dictum, ac faucibus justo tincidunt. Sed ut perspiciatis unde omnis iste natus error sit voluptatem.",
+    "Curabitur eleifend, odio nec feugiat commodo, ipsum neque lacinia orci. Praesent euismod, justo vel vehicula hendrerit, nisi libero efficitur nibh.",
+    "Fusce fermentum purus a elit finibus, in dictum nulla tempus. Nullam fermentum lacus vitae luctus ultricies. Donec luctus nibh nec enim lacinia.",
+    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.",
+    "Vivamus in risus sed nisi facilisis tempor vel vel nunc. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.",
+    "Integer tincidunt felis eget magna condimentum, nec vehicula nisl tempus. Sed ut perspiciatis unde omnis iste natus. Nemo enim ipsam voluptatem."
+  ]
+} 

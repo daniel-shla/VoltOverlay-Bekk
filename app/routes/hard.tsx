@@ -1,6 +1,7 @@
 import type { Route } from "./+types/home";
 import { useRef, useState, useEffect } from "react";
 import CharactersRow, { CharacterPopup } from "../components/CharactersRow";
+import Aktuelt, { ThemePopup } from "../components/Aktuelt";
 import { characters } from "../data/characters";
 
 import nrk from "app/assets/nrk.mp4"
@@ -15,6 +16,13 @@ export default function Hard() {
   const [isUserScrubbing, setIsUserScrubbing] = useState(false);
   const pauseTimerRef = useRef<number | null>(null);
   const [selectedCharacter, setSelectedCharacter] = useState<typeof characters[0] | null>(null);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [selectedTheme, setSelectedTheme] = useState<{ theme: string; question: string } | null>(null);
+  
+  // Log current time for debugging
+  useEffect(() => {
+    console.log("Current time state in Hard component:", currentTime);
+  }, [currentTime]);
   
   const handlePlay = () => {
     if (pauseTimerRef.current) {
@@ -23,6 +31,7 @@ export default function Hard() {
     }
     setPaused(false);
     setSelectedCharacter(null);
+    setSelectedTheme(null);
   };
 
   const handlePause = () => {
@@ -36,6 +45,10 @@ export default function Hard() {
     
     pauseTimerRef.current = window.setTimeout(() => {
       if (videoRef.current?.paused) {
+        // Update current time when paused
+        if (videoRef.current) {
+          setCurrentTime(videoRef.current.currentTime);
+        }
         setPaused(true);
       }
     }, 150);
@@ -51,6 +64,10 @@ export default function Hard() {
       setIsUserScrubbing(false);
       
       if (videoRef.current?.paused) {
+        // Update current time when seek is complete
+        if (videoRef.current) {
+          setCurrentTime(videoRef.current.currentTime);
+        }
         setPaused(true);
       }
     }, 200);
@@ -60,11 +77,35 @@ export default function Hard() {
     setSelectedCharacter(prevCharacter => 
       prevCharacter?.name === character.name ? null : character
     );
+    setSelectedTheme(null); // Close theme popup when selecting a character
+  };
+
+  const handleThemeClick = (theme: string, question: string) => {
+    setSelectedTheme(prevTheme => 
+      prevTheme?.theme === theme ? null : { theme, question }
+    );
+    setSelectedCharacter(null); // Close character popup when selecting a theme
+  };
+
+  const handleTimeUpdate = () => {
+    if (videoRef.current) {
+      setCurrentTime(videoRef.current.currentTime);
+      // Debug log
+      console.log("Time update:", videoRef.current.currentTime);
+    }
   };
 
   useEffect(() => {
     const videoElement = videoRef.current;
     if (videoElement) {
+      // Use a timer to periodically update the current time even when not playing
+      const timeUpdateInterval = setInterval(() => {
+        if (videoElement) {
+          setCurrentTime(videoElement.currentTime);
+        }
+      }, 500);
+      
+      // Rest of initialization...
       const playPromise = videoElement.play();
       
       if (playPromise !== undefined) {
@@ -78,13 +119,14 @@ export default function Hard() {
           console.error('Error playing video:', error);
         });
       }
-    }
 
-    return () => {
-      if (pauseTimerRef.current) {
-        window.clearTimeout(pauseTimerRef.current);
-      }
-    };
+      return () => {
+        clearInterval(timeUpdateInterval);
+        if (pauseTimerRef.current) {
+          window.clearTimeout(pauseTimerRef.current);
+        }
+      };
+    }
   }, []);
 
   useEffect(() => {
@@ -118,18 +160,32 @@ export default function Hard() {
           onPause={handlePause}
           onSeeking={handleSeeking}
           onSeeked={handleSeeked}
+          onTimeUpdate={handleTimeUpdate}
         />
 
         {paused && (
           <div className="absolute inset-0 pointer-events-auto" onClick={() => videoRef.current?.play()}>
             <div className="absolute inset-0 bg-black opacity-69"></div>
             
-            {/* Characters row - positioned at the bottom */}
+            {/* Characters row - positioned at the left top */}
             <div
-              className="absolute top-8"
+              className="absolute top-8 left-8"
               onClick={e => e.stopPropagation()}
             >
               <CharactersRow onCharacterClick={handleCharacterClick} />
+            </div>
+            
+            {/* Aktuelt component - positioned at the right top */}
+            <div
+              className="absolute top-8 right-8"
+              onClick={e => e.stopPropagation()}
+            >
+              <Aktuelt currentTime={currentTime} onThemeClick={handleThemeClick} />
+            </div>
+
+            {/* Debug display */}
+            <div className="absolute bottom-4 left-4 bg-black/70 text-white p-2 rounded text-sm">
+              Current time: {currentTime.toFixed(2)}s
             </div>
 
             {/* Character popup - shows when a character is selected */}
@@ -148,6 +204,26 @@ export default function Hard() {
                     </svg>
                   </button>
                   <CharacterPopup character={selectedCharacter} />
+                </div>
+              </div>
+            )}
+            
+            {/* Theme popup - shows when a theme is selected */}
+            {selectedTheme && (
+              <div
+                className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-[90vw] max-w-6xl max-h-[60vh] overflow-auto"
+                onClick={e => e.stopPropagation()}
+              >
+                <div className="relative bg-white rounded-lg shadow-2xl p-8">
+                  <button 
+                    onClick={() => setSelectedTheme(null)}
+                    className="absolute top-2 right-2 bg-black bg-opacity-40 rounded-full p-1 text-white hover:bg-opacity-60"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                  <ThemePopup theme={selectedTheme.theme} question={selectedTheme.question} />
                 </div>
               </div>
             )}
