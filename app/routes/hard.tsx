@@ -120,33 +120,24 @@ export default function Hard() {
         />
 
         {paused && (
-          <div className="absolute inset-0 pointer-events-auto">
+          <div className="absolute inset-0 pointer-events-auto" onClick={() => videoRef.current?.play()}>
             <div className="absolute inset-0 bg-black opacity-69"></div>
-            
-            {/* Main pause content */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <div className="bg-black bg-opacity-30 px-6 py-4 rounded-lg shadow-lg border border-gray-400">
-                <h2 className="text-xl font-bold mb-3 text-center text-white">Paused 🎬</h2>
-                <button
-                  onClick={() => videoRef.current?.play()}
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg w-full transition-colors duration-200"
-                >
-                  Continue Watching
-                </button>
-              </div>
-            </div>
-            
             {/* Characters row - positioned at the bottom */}
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+            <div
+              className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+              onClick={e => e.stopPropagation()}
+            >
               <div className="text-white text-center mb-2 text-sm">
                 Episode Characters
               </div>
               <CharactersRow onCharacterClick={handleCharacterClick} />
             </div>
-            
             {/* Character popup - shows when a character is selected */}
             {selectedCharacter && (
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 max-w-xl max-h-[70vh] overflow-auto">
+              <div
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 max-w-xl max-h-[70vh] overflow-auto"
+                onClick={e => e.stopPropagation()}
+              >
                 <div className="relative">
                   <button 
                     onClick={() => setSelectedCharacter(null)}
