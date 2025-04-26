@@ -17,6 +17,9 @@ export default function Home() {
         <NavLink to="/more-info">
           <a className="text-blue-600 underline hover:text-blue-800">Du kan finne mer info her BOOMFERDIG</a>
         </NavLink>
+        <div className="mt-4">
+          <img src="/gutta.png" alt="Gutta" className="max-w-full h-auto" />
+        </div>
       </div>
       <div className="absolute right-10 bottom-10">
         <ButtonWithIcon
