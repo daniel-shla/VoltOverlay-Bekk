@@ -1,0 +1,23 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# project-architecture
+
+Whenever you are asked to make changes that affect the project architecture—including, but not limited to, changes in the structure, tech stack, build or deployment process, or the way frontend and backend interact—follow these steps:
+
+1. **Read the current architecture:**
+   - Before making any changes, read the latest `ARCHITECTURE.md` file in the project root to understand the current state of the project's architecture, tech stack, and structure.
+
+2. **Plan and make changes:**
+   - Make the requested architectural changes, ensuring they are consistent with the project's goals and existing patterns as described in `ARCHITECTURE.md`.
+
+3. **Update documentation:**
+   - After making architectural changes, update `ARCHITECTURE.md` to accurately reflect the new state of the codebase. This includes updating diagrams, tech stack lists, workflow instructions, and any other relevant sections.
+
+4. **Communicate changes:**
+   - When responding to the user, mention that `ARCHITECTURE.md` has been updated to reflect the architectural changes, and briefly summarize what was changed in both the codebase and the documentation.
+
+**Purpose:**
+This rule ensures that the architectural documentation is always up-to-date and that all changes are made with a full understanding of the project's design and structure.

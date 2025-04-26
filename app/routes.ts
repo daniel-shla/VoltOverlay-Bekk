@@ -5,4 +5,5 @@ export default [
   route("/hjelp" ,"routes/help.tsx"),
   route("/hard", "routes/hard.tsx"),
   route("/more-info", "routes/more-info.tsx"),
+  route("/see-ui-elements", "routes/see-ui-elements.tsx"),
 ] satisfies RouteConfig;
