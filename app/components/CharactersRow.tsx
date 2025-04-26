@@ -38,8 +38,8 @@ Vi håper å kunne presentere mer informasjon om denne personen i fremtiden, da 
     description: `En mystisk deltaker som nylig har blitt en del av prosjektet. Lite er kjent om bakgrunnen, men innsatsen har allerede gjort inntrykk på teamet.`
   },
   {
-    name: "Screenshot 2025-04-26 at 13.32.33.png",
-    src: "/Characters/Screenshot 2025-04-26 at 13.32.33.png",
+    name: "Screenshot_2025-04-26_13-32-33.png",
+    src: "/Characters/Screenshot_2025-04-26_13-32-33.png",
     displayName: "Ny Deltaker",
     description: `En ny deltaker har blitt med i prosjektet. Bildet ble tatt under en viktig hendelse i april 2025.`
   },
