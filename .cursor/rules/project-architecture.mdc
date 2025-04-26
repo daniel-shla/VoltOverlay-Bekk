@@ -1,7 +1,7 @@
 ---
-description: Instructs to read the project architecure file before making any changes to the codebase, and to update the doc to reflect the changes afterwards.
+description: 
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 # project-architecture
 

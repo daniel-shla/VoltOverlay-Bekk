@@ -49,6 +49,7 @@ labyrintenfinale-bekksparrow/
 │
 ├── app/                    # Frontend source code
 │   ├── components/         # Reusable React components
+│   │   └── CharactersRow.tsx  # Row of clickable character image cards
 │   ├── icons/              # Custom SVG icon components
 │   ├── routes/             # Route-based page components
 │   ├── root.tsx            # Main app entry and layout
@@ -62,6 +63,7 @@ labyrintenfinale-bekksparrow/
 │   └── ...                 # (No persistent storage, demo only)
 │
 ├── public/                 # Static assets (if any)
+│   └── Characters/            # Character images used in the UI (served as static files)
 ├── package.json            # Root dependencies, scripts, workspaces
 ├── vite.config.ts          # Vite config (plugins, proxy, etc.)
 ├── tsconfig.json           # TypeScript config
@@ -94,13 +96,15 @@ labyrintenfinale-bekksparrow/
 
 ---
 
-## Notable Files
+## Notable Files & Components
 
 - `vite.config.ts`: Configures Vite, Tailwind, React Router, and API proxy.
 - `app/root.tsx`: Main layout, error boundary, and app entry.
 - `backend/index.ts`: Express server setup, static serving, and API mounting.
 - `backend/api/tips.ts`: Example API with GET/POST endpoints for "tips".
 - `app/routes/more-info.tsx`: Example of fetching data from the backend API.
+- `app/components/CharactersRow.tsx`: Displays a row of clickable character images.
+- `public/Characters/`: Folder with static character images.
 
 ---
 
@@ -113,6 +117,8 @@ labyrintenfinale-bekksparrow/
 |            | TypeScript         | Type safety                                   |
 |            | Tailwind CSS       | Utility-first styling                         |
 |            | Vite               | Dev server, build tool                        |
+|            | CharactersRow.tsx  | Displays a row of clickable character images   |
+|            | Characters/        | Folder with static character images            |
 | Backend    | Express.js         | API server, static file serving               |
 |            | TypeScript         | Type safety                                   |
 |            | tsx                | Run TS directly (no build step needed)        |
