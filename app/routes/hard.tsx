@@ -1,6 +1,7 @@
 import type { Route } from "./+types/home";
 import { useRef, useState, useEffect } from "react";
-import CharactersRow, { CharacterPopup, characters } from "../components/CharactersRow";
+import CharactersRow, { CharacterPopup } from "../components/CharactersRow";
+import { characters } from "../data/characters";
 
 import nrk from "app/assets/nrk.mp4"
 
@@ -122,23 +123,22 @@ export default function Hard() {
         {paused && (
           <div className="absolute inset-0 pointer-events-auto" onClick={() => videoRef.current?.play()}>
             <div className="absolute inset-0 bg-black opacity-69"></div>
+            
             {/* Characters row - positioned at the bottom */}
             <div
-              className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+              className="absolute top-8"
               onClick={e => e.stopPropagation()}
             >
-              <div className="text-white text-center mb-2 text-sm">
-                Episode Characters
-              </div>
               <CharactersRow onCharacterClick={handleCharacterClick} />
             </div>
+
             {/* Character popup - shows when a character is selected */}
             {selectedCharacter && (
               <div
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 max-w-xl max-h-[70vh] overflow-auto"
+                className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-[90vw] max-w-6xl max-h-[60vh] overflow-auto"
                 onClick={e => e.stopPropagation()}
               >
-                <div className="relative">
+                <div className="relative bg-white rounded-lg shadow-2xl p-8">
                   <button 
                     onClick={() => setSelectedCharacter(null)}
                     className="absolute top-2 right-2 bg-black bg-opacity-40 rounded-full p-1 text-white hover:bg-opacity-60"
