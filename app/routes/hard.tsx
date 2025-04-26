@@ -1,6 +1,7 @@
 import type { Route } from "./+types/home";
 import { useRef, useState, useEffect } from "react";
-import CharactersRow, { CharacterPopup, characters } from "../components/CharactersRow";
+import CharactersRow, { CharacterPopup } from "../components/CharactersRow";
+import { characters } from "../data/characters";
 
 import nrk from "app/assets/nrk.mp4"
 
