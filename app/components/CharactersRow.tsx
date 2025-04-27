@@ -4,7 +4,7 @@ import type { Character } from "../data/characters";
 
 export function CharacterPopup({ character }: { character: Character }) {
   return (
-    <div className="w-full h-full max-w-full max-h-full bg-white rounded-lg grid grid-cols-3 grid-rows-2">
+    <div className="w-full h-full max-w-full max-h-full bg-white rounded-lg grid grid-cols-3 grid-rows-2 gap-10">
       {/* Venstre kolonne (bilde, dekker begge rader) */}
       <div className="col-span-1 flex items-center justify-center">
         <img
@@ -29,14 +29,14 @@ export function CharacterPopup({ character }: { character: Character }) {
 
       {/* Nederst til høyre (beskrivelse) */}
       <div className="col-span-1 overflow-auto">
-        <p className="text-gray-700 whitespace-pre-line text-center">
+        <p className="text-gray-700 whitespace-pre-line ">
           {character.bio}
         </p>
       </div>
 
       {/* Nederst til høyre (beskrivelse) */}
       <div className="col-span-2 overflow-auto">
-        <p className="text-gray-700 whitespace-pre-line text-center">
+        <p className="text-gray-700 whitespace-pre-line">
           {character.description}
         </p>
       </div>

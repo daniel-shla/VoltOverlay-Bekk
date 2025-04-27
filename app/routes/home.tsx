@@ -237,7 +237,10 @@ export default function Home() {
             {/* Character popup - shows when a character is selected */}
             {selectedCharacter && (
               <div
-                className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-[90vw] max-w-6xl max-h-[60vh] overflow-auto"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 
+              w-[90vw] sm:w-[80vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw]
+              max-w-5xl
+              h-auto max-h-[80vh] overflow-auto"
                 onClick={e => e.stopPropagation()}
               >
                 <div className="relative bg-white rounded-lg shadow-2xl p-8">
