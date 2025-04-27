@@ -6,6 +6,13 @@ import { characters } from "../data/characters";
 
 import nrk from "app/assets/nrk.mp4"
 
+// Import TimeSeekEvent interface from Aktuelt
+interface TimeSeekEvent {
+  seconds: number;
+  segmentTitle: string;
+  topicTheme: string;
+}
+
 export function meta({}: Route.MetaArgs) {
   return [{ title: "Video Player" }];
 }
@@ -85,6 +92,37 @@ export default function Hard() {
       prevTheme?.theme === theme ? null : { theme, question }
     );
     setSelectedCharacter(null); // Close character popup when selecting a theme
+  };
+
+  // Handle time seeking from the theme finder
+  const handleTimeSeek = (event: TimeSeekEvent) => {
+    if (videoRef.current) {
+      // Set the current time of the video
+      videoRef.current.currentTime = event.seconds;
+      
+      // Start playing the video
+      videoRef.current.play()
+        .then(() => {
+          console.log(`Jumped to ${event.seconds}s (${event.segmentTitle} - ${event.topicTheme})`);
+        })
+        .catch(error => {
+          console.error('Error playing after time seek:', error);
+        });
+      
+      // Show a notification (optional)
+      const notification = document.createElement('div');
+      notification.className = 'fixed top-4 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-opacity duration-500';
+      notification.textContent = `Hopper til: ${event.segmentTitle} - ${event.topicTheme}`;
+      document.body.appendChild(notification);
+      
+      // Remove notification after 3 seconds
+      setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 500);
+      }, 3000);
+    }
   };
 
   const handleTimeUpdate = () => {
@@ -167,6 +205,11 @@ export default function Hard() {
           <div className="absolute inset-0 pointer-events-auto" onClick={() => videoRef.current?.play()}>
             <div className="absolute inset-0 bg-black opacity-69"></div>
             
+            {/* Pause icon - positioned in the center */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50 animate-pulse">
+              <img src="/pause-256.png" alt="Pause" className="w-32 h-32" />
+            </div>
+            
             {/* Characters row - positioned at the left top */}
             <div
               className="absolute top-8 left-8"
@@ -180,12 +223,7 @@ export default function Hard() {
               className="absolute top-8 right-8"
               onClick={e => e.stopPropagation()}
             >
-              <Aktuelt currentTime={currentTime} onThemeClick={handleThemeClick} />
-            </div>
-
-            {/* Debug display */}
-            <div className="absolute bottom-4 left-4 bg-black/70 text-white p-2 rounded text-sm">
-              Current time: {currentTime.toFixed(2)}s
+              <Aktuelt currentTime={currentTime} onThemeClick={handleThemeClick} onTimeSeek={handleTimeSeek} />
             </div>
 
             {/* Character popup - shows when a character is selected */}

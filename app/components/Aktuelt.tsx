@@ -1,7 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+
+// Define interfaces for our data structures
+interface Topic {
+  theme: string;
+  question: string;
+  description?: string; // Optional since it's added programmatically
+}
+
+interface Segment {
+  title: string;
+  timeStart: string;
+  timeEnd: string;
+  topics: Topic[];
+}
+
+// New interface for time-seek functionality
+interface TimeSeekEvent {
+  seconds: number;
+  segmentTitle: string;
+  topicTheme: string;
+}
 
 // Import the manus data directly to avoid import issues
-const manusData = {
+const manusData: { segments: Segment[] } = {
   "segments": [
     {
       "title": "Start",
@@ -190,7 +211,6 @@ function timeToSeconds(timeStr: string): number {
       const parts = timeStr.split(":");
       
       if (parts.length === 2) {
-        // MM:SS format
         const [minutes, seconds] = parts.map(Number);
         if (isNaN(minutes) || isNaN(seconds)) {
           console.error(`Invalid time format: ${timeStr}`);
@@ -217,9 +237,22 @@ function timeToSeconds(timeStr: string): number {
   }
 }
 
+// New interface for chat messages
+interface ChatMessage {
+  text: string;
+  isUser: boolean;
+  timestamp: Date;
+}
+
+// Function to create a unique key for each theme's chat messages
+function createThemeKey(theme: string): string {
+  return `chat_${theme.toLowerCase().replace(/\s+/g, '_')}`;
+}
+
 interface AktueltProps {
   currentTime: number; // Current video time in seconds
   onThemeClick?: (theme: string, question: string) => void;
+  onTimeSeek?: (event: TimeSeekEvent) => void; // New prop for seeking to a specific time
 }
 
 export function ThemePopup({ theme, question }: { theme: string; question: string }) {
@@ -227,12 +260,108 @@ export function ThemePopup({ theme, question }: { theme: string; question: strin
   const descIndex = Math.abs(theme.length) % loremDescriptions.length;
   const description = loremDescriptions[descIndex];
   
+  // Create a theme-specific key for this chat
+  const themeKey = createThemeKey(theme);
+  
+  // State for chatbot functionality - use theme in state key to separate chats
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const [isExpanded, setIsExpanded] = useState(false);
+  
+  // Debug input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    console.log("Input changed to:", value);
+    setInputValue(value);
+  };
+  
+  // Handle key events to prevent video from playing/pausing when typing space
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    // Stop spacebar from triggering video play/pause
+    if (e.key === " " || e.code === "Space") {
+      e.stopPropagation();
+    }
+  };
+  
+  // Reset chat when expanding the chat panel
+  useEffect(() => {
+    if (isExpanded) {
+      // Don't reset immediately when opening to prevent flicker
+    } else {
+      // Reset chat when closing
+      setChatMessages([]);
+    }
+  }, [isExpanded]);
+  
+  // Debug to show current input value
+  useEffect(() => {
+    console.log("Current input value:", inputValue);
+  }, [inputValue]);
+  
+  // Function to handle user sending a message
+  const handleSendMessage = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!inputValue.trim()) return;
+    
+    // Add user message
+    const userMessage: ChatMessage = {
+      text: inputValue,
+      isUser: true,
+      timestamp: new Date()
+    };
+    
+    // Add to chat messages
+    const newMessages = [...chatMessages, userMessage];
+    setChatMessages(newMessages);
+    
+    console.log(`Chat messages for ${themeKey} after user input:`, newMessages);
+    
+    // Clear input field
+    const userInput = inputValue;
+    setInputValue("");
+    
+    // Simulate AI response (in a real app, this would call an API)
+    setTimeout(() => {
+      // Generate a contextual response based on the theme
+      let responseText = "";
+      
+      if (userInput.toLowerCase().includes("mer") || 
+          userInput.toLowerCase().includes("informasjon") ||
+          userInput.toLowerCase().includes("fortell")) {
+        responseText = `${theme} er et viktig tema i programmet. Det er verdt å merke seg at ${question.substring(0, 40)}...`;
+      } else if (userInput.toLowerCase().includes("hvor") || 
+                userInput.toLowerCase().includes("når") ||
+                userInput.toLowerCase().includes("hvordan")) {
+        responseText = `For mer detaljert informasjon om ${theme}, anbefaler jeg å sjekke NRKs nettsider eller Wikipedia.`;
+      } else {
+        responseText = `Interessant spørsmål om ${theme}! Dette er noe programlederne diskuterte i detalj. Jeg anbefaler å se hele segmentet for å få full forståelse.`;
+      }
+      
+      const botMessage: ChatMessage = {
+        text: responseText,
+        isUser: false,
+        timestamp: new Date()
+      };
+      
+      setChatMessages(prevMessages => {
+        const updatedMessages = [...prevMessages, botMessage];
+        console.log(`Chat messages for ${themeKey} after bot response:`, updatedMessages);
+        return updatedMessages;
+      });
+    }, 1000);
+  };
+  
+  // For debugging
+  useEffect(() => {
+    console.log("Current chat messages:", chatMessages);
+  }, [chatMessages]);
+  
   return (
-    <div className="w-full h-full max-w-full max-h-full bg-white rounded-lg p-6">
+    <div className="w-full h-full max-w-full max-h-full bg-white rounded-lg p-6 flex flex-col">
       <h2 className="text-2xl font-bold text-gray-900 mb-2">{theme}</h2>
       <p className="text-gray-700 whitespace-pre-line mb-4">{question}</p>
       
-      <div className="mt-4 pt-4 border-t border-gray-200">
+      <div className="mt-4 pt-4 border-t border-gray-200 flex-1 overflow-hidden flex flex-col">
         <h3 className="text-lg font-semibold text-gray-800 mb-2">Beskrivelse:</h3>
         <p className="text-gray-600 whitespace-pre-line">{description}</p>
         
@@ -243,6 +372,93 @@ export function ThemePopup({ theme, question }: { theme: string; question: strin
             <li>Sed do eiusmod tempor incididunt ut labore et dolore</li>
             <li>Ut enim ad minim veniam, quis nostrud exercitation</li>
           </ul>
+        </div>
+        
+        {/* Chatbot section - collapsed by default */}
+        <div className="mt-6">
+          <button 
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="w-full py-2 px-4 bg-blue-50 hover:bg-blue-100 text-blue-800 font-medium rounded-lg transition-colors flex items-center justify-center"
+          >
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+            </svg>
+            {isExpanded ? "Skjul spørreassistent" : "Spør om dette temaet"}
+          </button>
+          
+          {isExpanded && (
+            <div className="mt-3 border border-blue-100 rounded-lg overflow-hidden flex flex-col bg-white" style={{ maxHeight: "300px" }}>
+              {/* Chat messages */}
+              <div className="flex-1 p-4 overflow-y-auto bg-white" style={{ minHeight: "150px" }}>
+                {chatMessages.length === 0 ? (
+                  <div className="text-center text-gray-500 my-8">
+                    <svg className="w-12 h-12 mx-auto mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                    </svg>
+                    <p className="text-gray-800">Spør om noe relatert til «{theme}»</p>
+                    <p className="text-xs mt-1 text-gray-600">For eksempel: "Fortell meg mer om dette temaet"</p>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {/* Reset button when messages exist */}
+                    <div className="flex justify-end mb-2">
+                      <button 
+                        onClick={() => setChatMessages([])} 
+                        className="text-xs text-gray-500 hover:text-gray-700 flex items-center"
+                      >
+                        <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                        Nullstill samtale
+                      </button>
+                    </div>
+                    
+                    {chatMessages.map((msg, idx) => (
+                      <div 
+                        key={idx} 
+                        className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}
+                      >
+                        <div 
+                          className={`max-w-[80%] px-4 py-2 rounded-lg shadow ${
+                            msg.isUser 
+                              ? 'bg-blue-600 text-white rounded-tr-none' 
+                              : 'bg-gray-200 text-gray-800 rounded-tl-none'
+                          }`}
+                        >
+                          <div className="whitespace-pre-wrap break-words font-medium">{msg.text}</div>
+                          <div className={`text-xs mt-1 ${msg.isUser ? 'text-blue-100' : 'text-gray-500'}`}>
+                            {msg.timestamp.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
+              {/* Input area */}
+              <form onSubmit={handleSendMessage} className="border-t border-gray-200 p-2 bg-white flex z-10">
+                <input
+                  type="text"
+                  value={inputValue}
+                  onChange={handleInputChange}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Skriv et spørsmål om dette temaet..."
+                  className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 bg-white"
+                  style={{ zIndex: 20 }}
+                />
+                <button 
+                  type="submit"
+                  disabled={!inputValue.trim()}
+                  className="ml-2 px-4 py-2 bg-blue-600 text-white rounded-lg disabled:bg-blue-300 disabled:cursor-not-allowed z-10"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                  </svg>
+                </button>
+              </form>
+            </div>
+          )}
         </div>
         
         <div className="mt-4 text-right">
@@ -299,13 +515,29 @@ function getSegmentIcon(segmentTitle: string): React.ReactNode {
   }
 }
 
-export default function Aktuelt({ currentTime, onThemeClick }: AktueltProps) {
+export default function Aktuelt({ currentTime, onThemeClick, onTimeSeek }: AktueltProps) {
   // Debug logging for time detection
   useEffect(() => {
     if (currentTime > 900) { // Only log for times > 15 minutes
       console.log(`Checking segments for time: ${currentTime} seconds (${Math.floor(currentTime/60)}:${Math.floor(currentTime%60).toString().padStart(2, '0')})`);
     }
   }, [currentTime]);
+
+  // State for theme finder modal
+  const [themeFinderOpen, setThemeFinderOpen] = useState(false);
+
+  // Function to handle time seeking
+  const handleTimeSeek = (timeStr: string, segmentTitle: string, topicTheme: string) => {
+    if (onTimeSeek) {
+      const seconds = timeToSeconds(timeStr);
+      onTimeSeek({
+        seconds,
+        segmentTitle,
+        topicTheme
+      });
+      setThemeFinderOpen(false); // Close modal after selection
+    }
+  };
 
   // Find the current segment based on currentTime
   const currentSegment = manusData.segments.find(segment => {
@@ -368,7 +600,7 @@ export default function Aktuelt({ currentTime, onThemeClick }: AktueltProps) {
       </div>
       
       <div className="flex flex-col gap-2 mt-1">
-        {currentSegment.topics.map((topic, index) => (
+        {currentSegment.topics.map((topic: Topic, index) => (
           <button
             key={index}
             onClick={() => onThemeClick && onThemeClick(topic.theme, topic.question)}
@@ -390,6 +622,17 @@ export default function Aktuelt({ currentTime, onThemeClick }: AktueltProps) {
         ))}
       </div>
       
+      {/* Find Theme Button */}
+      <button 
+        onClick={() => setThemeFinderOpen(true)}
+        className="mt-3 py-2 px-3 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded flex items-center justify-center border border-white/10 transition-colors"
+      >
+        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+        Finn tema
+      </button>
+      
       <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between">
         <div className="text-xs text-white/70">
           Nåværende tid: {Math.floor(currentTime/60)}:{Math.floor(currentTime%60).toString().padStart(2, '0')}
@@ -398,6 +641,68 @@ export default function Aktuelt({ currentTime, onThemeClick }: AktueltProps) {
           {currentSegment.topics.length} emner
         </div>
       </div>
+      
+      {/* Theme Finder Modal */}
+      {themeFinderOpen && (
+        <div className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-16 sm:pt-24" onClick={() => setThemeFinderOpen(false)}>
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setThemeFinderOpen(false)}></div>
+          <div 
+            className="relative bg-gray-900 rounded-xl shadow-2xl border border-gray-700 overflow-hidden max-w-md w-full max-h-[70vh] flex flex-col"
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="p-4 border-b border-gray-700 flex items-center justify-between">
+              <h2 className="text-xl font-bold text-white">Alle temaer</h2>
+              <button 
+                onClick={() => setThemeFinderOpen(false)}
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto p-2">
+              {manusData.segments.map((segment, idx) => (
+                <div key={idx} className="mb-4">
+                  <div className="flex items-center mb-2">
+                    <div className={`${getThemeColor(segment.title)} w-4 h-4 rounded-full mr-2`}></div>
+                    <h3 className="text-white font-medium text-sm">
+                      {segment.title} <span className="text-gray-400 text-xs">({segment.timeStart} - {segment.timeEnd})</span>
+                    </h3>
+                  </div>
+                  
+                  <div className="pl-6 space-y-2">
+                    {segment.topics.map((topic, topicIdx) => (
+                      <button 
+                        key={topicIdx}
+                        onClick={() => handleTimeSeek(segment.timeStart, segment.title, topic.theme)}
+                        className="block w-full text-left p-2 rounded hover:bg-white/10 transition-colors group"
+                      >
+                        <div className="flex items-center">
+                          <span className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center text-xs text-white mr-2">
+                            {topicIdx + 1}
+                          </span>
+                          <div>
+                            <p className="text-white text-sm font-medium group-hover:text-blue-300 transition-colors">{topic.theme}</p>
+                            <p className="text-gray-400 text-xs line-clamp-1">
+                              {topic.question.length > 50 ? `${topic.question.substring(0, 50)}...` : topic.question}
+                            </p>
+                          </div>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="p-3 border-t border-gray-700 bg-gray-800 text-center">
+              <p className="text-xs text-gray-400">Klikk på et tema for å hoppe til det aktuelle tidspunktet</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 } 
