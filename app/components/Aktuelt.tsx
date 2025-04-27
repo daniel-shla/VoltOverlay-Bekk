@@ -21,7 +21,23 @@ interface TimeSeekEvent {
   topicTheme: string;
 }
 
+// New interface for profile data
+interface Profile {
+  name: string;
+  timestamp: string;
+  seconds: number;
+  image?: string;
+}
+
 // Import the manus data directly to avoid import issues
+//featuered characters:
+//Sylvie Listhaug: 2:05
+//Erna Solberg: 2:55
+//Siv Jensen: 2:55
+//Mulla Krekar: 3:55
+//Fidel Castro: 7:15
+//Knut Hoem: 11:18
+
 const manusData: { segments: Segment[] } = {
   "segments": [
     {
@@ -203,6 +219,44 @@ manusData.segments.forEach(segment => {
   });
 });
 
+// Profile data for people shown in video clips
+const profileData: Profile[] = [
+  {
+    name: "Sylvi Listhaug",
+    timestamp: "2:05",
+    seconds: timeToSeconds("2:05"),
+    image: "/Sylvie.png"
+  },
+  {
+    name: "Erna Solberg",
+    timestamp: "2:55",
+    seconds: timeToSeconds("2:55"),
+    image: "/Erna.png"
+  },
+  {
+    name: "Siv Jensen",
+    timestamp: "2:55",
+    seconds: timeToSeconds("2:55"),
+    image: "/Siv.png"
+  },
+  {
+    name: "Mulla Krekar",
+    timestamp: "3:55",
+    seconds: timeToSeconds("3:55"),
+    image: "/Mulla.png"
+  },
+  {
+    name: "Fidel Castro",
+    timestamp: "7:15",
+    seconds: timeToSeconds("7:15")
+  },
+  {
+    name: "Knut Hoem",
+    timestamp: "11:18",
+    seconds: timeToSeconds("11:18")
+  }
+];
+
 // Improved utility function to convert MM:SS or MM:SS:FF format to seconds
 function timeToSeconds(timeStr: string): number {
   try {
@@ -253,6 +307,97 @@ interface AktueltProps {
   currentTime: number; // Current video time in seconds
   onThemeClick?: (theme: string, question: string) => void;
   onTimeSeek?: (event: TimeSeekEvent) => void; // New prop for seeking to a specific time
+}
+
+// Separate component to display profiles in a sidebar menu
+export function ProfileMenu({ currentTime, onTimeSeek }: { currentTime: number, onTimeSeek?: (event: TimeSeekEvent) => void }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  // Filter profiles to only show those that appeared within 2 minutes (120 seconds) of current time
+  const nearbyProfiles = profileData.filter(profile => {
+    const timeDifference = Math.abs(profile.seconds - currentTime);
+    return timeDifference <= 120; // 2 minutes in seconds
+  });
+  
+  // Sort profiles by closeness to current time
+  const sortedProfiles = [...nearbyProfiles].sort((a, b) => {
+    const diffA = Math.abs(a.seconds - currentTime);
+    const diffB = Math.abs(b.seconds - currentTime);
+    return diffA - diffB;
+  });
+  
+  // Handle clicking on a profile to seek to that time
+  const handleProfileClick = (profile: Profile) => {
+    if (onTimeSeek) {
+      onTimeSeek({
+        seconds: profile.seconds,
+        segmentTitle: "Profile",
+        topicTheme: profile.name
+      });
+    }
+  };
+  
+  // If there are no nearby profiles, don't show the menu button
+  if (sortedProfiles.length === 0) {
+    return null;
+  }
+  
+  return (
+    <div className="relative">
+      {/* Button to toggle menu */}
+      <button 
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        className="py-3 px-5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors"
+      >
+        Viste Profiler {isMenuOpen ? '×' : `(${sortedProfiles.length})`}
+      </button>
+      
+      {/* Horizontal expanding menu from right to left */}
+      <div 
+        className={`absolute bottom-16 right-0 transform transition-all duration-300 origin-right ${
+          isMenuOpen ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'
+        }`}
+        style={{ width: "calc(50vw - 4rem)", minWidth: "300px" }}
+      >
+        <div className="bg-gray-900 border border-gray-700 rounded-lg p-4 shadow-lg w-full">
+          <div className="flex justify-between items-center mb-3">
+            <h3 className="text-white font-bold">Viste profiler</h3>
+            <button 
+              onClick={() => setIsMenuOpen(false)}
+              className="text-gray-400 hover:text-white"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+          <div className="flex overflow-x-auto space-x-3 pb-2">
+            {sortedProfiles.map((profile, index) => (
+              <div
+                key={index}
+                onClick={() => handleProfileClick(profile)}
+                className="flex-shrink-0 w-32 bg-gray-800 hover:bg-gray-700 rounded-lg cursor-pointer transition-colors overflow-hidden flex flex-col"
+              >
+                <div className="w-full h-32 bg-gray-600 flex-shrink-0 overflow-hidden">
+                  {profile.image ? (
+                    <img src={profile.image} alt={profile.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-white text-3xl font-bold">
+                      {profile.name.charAt(0)}
+                    </div>
+                  )}
+                </div>
+                <div className="p-2">
+                  <p className="text-white font-medium text-sm truncate">{profile.name}</p>
+                  <p className="text-gray-400 text-xs">Vist ved {profile.timestamp}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export function ThemePopup({ theme, question }: { theme: string; question: string }) {
@@ -566,6 +711,7 @@ export default function Aktuelt({ currentTime, onThemeClick, onTimeSeek }: Aktue
           <h3 className="text-lg font-semibold text-white">Ingen aktive temaer</h3>
         </div>
         <p className="text-white/70 text-sm mb-3">Nåværende tid: {Math.floor(currentTime/60)}:{Math.floor(currentTime%60).toString().padStart(2, '0')}</p>
+        
         <div className="text-xs text-white/50 mt-1 border-t border-white/10 pt-3">
           <p className="font-medium mb-1">Tilgjengelige segmenter:</p>
           <div className="max-h-32 overflow-y-auto">

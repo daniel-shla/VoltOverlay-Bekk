@@ -1,7 +1,7 @@
 import type { Route } from "./+types/home";
 import { useRef, useState, useEffect } from "react";
 import CharactersRow, { CharacterPopup } from "../components/CharactersRow";
-import Aktuelt, { ThemePopup } from "../components/Aktuelt";
+import Aktuelt, { ThemePopup, ProfileMenu } from "../components/Aktuelt";
 import { characters } from "../data/characters";
 
 import nrk from "app/assets/nrk.mp4"
@@ -224,6 +224,14 @@ export default function Home() {
               onClick={e => e.stopPropagation()}
             >
               <Aktuelt currentTime={currentTime} onThemeClick={handleThemeClick} onTimeSeek={handleTimeSeek} />
+            </div>
+            
+            {/* ProfileMenu component - positioned at the bottom right */}
+            <div
+              className="absolute bottom-8 right-8"
+              onClick={e => e.stopPropagation()}
+            >
+              <ProfileMenu currentTime={currentTime} onTimeSeek={handleTimeSeek} />
             </div>
 
             {/* Character popup - shows when a character is selected */}
