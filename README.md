@@ -13,6 +13,17 @@ This repository is the starting point for the case assignment in Labyrintenfinal
 | ![4](https://github.com/user-attachments/assets/a5a787f8-92c8-47c7-9f7f-91634b8daf0f) | ![5](https://github.com/user-attachments/assets/3bf1a79f-01fe-41b9-8e24-01a69a05911a) | ![6](https://github.com/user-attachments/assets/39f54dd8-7119-458b-a465-4dc635bb4de2) |
 
 
+## Images from the event 
+## Event Images
+
+| 1 | 2 | 3 |
+|---|---|---|
+| ![Team and Coaches](https://github.com/user-attachments/assets/670f64f7-996c-408d-b23c-4fd3b728469a) | ![Agenda](https://github.com/user-attachments/assets/10c91fa4-2f1a-40e8-bac8-370277f0c69c) | ![Winner Prize](https://github.com/user-attachments/assets/31fee900-0bb0-4274-95e2-92241429058b) |
+
+| 4 | 5 | 6 |
+|---|---|---|
+| ![Competition](https://github.com/user-attachments/assets/6940474f-3caf-45e7-bc89-dda679c3d514) | ![Good Vibes](https://github.com/user-attachments/assets/ebbc16df-97a6-48ed-8f59-04c4a631ea15) | ![Winning Team Semifinal](https://github.com/user-attachments/assets/c2477e89-a982-4909-bbb3-ac03d35f8756) |
+
 ## Getting Started
 
 ### First-Time Setup
@@ -68,6 +79,5 @@ Deploying to the World
 
 The app is hosted on Heroku: https://bekksparrow-9ffe029a038a.herokuapp.com/
 
-.
 
 To deploy, just push to Git. Heroku’s pipeline will handle the rest. For any changes on Heroku, contact one of the coaches.
