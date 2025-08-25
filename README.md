@@ -12,9 +12,6 @@ This repository is the starting point for the case assignment in Labyrintenfinal
 |---|---|---|
 | ![4](https://github.com/user-attachments/assets/a5a787f8-92c8-47c7-9f7f-91634b8daf0f) | ![5](https://github.com/user-attachments/assets/3bf1a79f-01fe-41b9-8e24-01a69a05911a) | ![6](https://github.com/user-attachments/assets/39f54dd8-7119-458b-a465-4dc635bb4de2) |
 
-| 7 |
-|---|
-| ![7](https://github.com/user-attachments/assets/cb737ba3-e6e7-4820-9e6a-f6d477cc9362) |
 
 ## Getting Started
 
