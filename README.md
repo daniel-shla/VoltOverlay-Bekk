@@ -1,6 +1,22 @@
-# Labyrintenfinale 2025
+# Labyrinten 2025 – Programming Competition
+
+Labyrinten 2025 is a national programming competition **hosted by the Norwegian consultancy Bekk**. Teams of students compete over an intensive weekend to solve challenging case assignments, develop functional solutions, and pitch their ideas to a jury.
+
+The competition highlights:
+- Hands-on problem-solving under time pressure.
+- Collaboration in small teams, combining technical and creative skills.
+- Development of practical, real-world solutions.
+- Opportunities to pitch and present projects to experienced professionals.
+- A fun, engaging environment with networking and learning opportunities.
+
+Labyrinten challenges participants in both coding and teamwork, making it a unique and rewarding experience for everyone involved.
+
+---
+
+# Labyrintenfinale 2025 – Project Repository
 
 This repository is the starting point for the case assignment in Labyrintenfinalen 2025. It contains an example of a simple frontend app in React + TypeScript + Vite and a simple Express + TypeScript backend with an API for tips.
+
 
 ## Screenshots
 
