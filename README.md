@@ -1,31 +1,76 @@
 # Labyrintenfinale 2025
 
-Dette repoet er utgangspunkt for caseoppgaven i Labyrintenfinalen 2025. Her kan dere se et eksempel på en enkel frontendapp i React + Typescript + Vite og en enkel Express + TypeScript backend med et api for tips.
+This repository is the starting point for the case assignment in Labyrintenfinalen 2025. It contains an example of a simple frontend app in React + TypeScript + Vite and a simple Express + TypeScript backend with an API for tips.
 
-## Kom i gang
+## Screenshots
 
-### Førstegangsoppsett
+| 1 | 2 | 3 |
+|---|---|---|
+| ![1](https://github.com/user-attachments/assets/31c840f5-d171-4aab-8bbd-704afba78cb4) | ![2](https://github.com/user-attachments/assets/1d2db348-db9a-47a0-9999-8c437f476272) | ![3](https://github.com/user-attachments/assets/1bf61d85-b415-4980-a121-6667dc5baf75) |
 
-1. Klon dette repoet til din lokale maskin. Åpne terminalen, naviger til mappen du vil ha repoet i og skriv kommandoen `git clone git@github.com:bekk/labyrintenfinale-bekksparrow.git`.
-2. Sjekk at du har node og npm installert på din maskin med `npm --version` og `node --version`. Hvis du på en av disse får `command not found`, må du installere det, feks med brew. Spør gjerne en coach om hjelp!
+| 4 | 5 | 6 |
+|---|---|---|
+| ![4](https://github.com/user-attachments/assets/a5a787f8-92c8-47c7-9f7f-91634b8daf0f) | ![5](https://github.com/user-attachments/assets/3bf1a79f-01fe-41b9-8e24-01a69a05911a) | ![6](https://github.com/user-attachments/assets/39f54dd8-7119-458b-a465-4dc635bb4de2) |
 
-### Kjøre opp backend
+| 7 |
+|---|
+| ![7](https://github.com/user-attachments/assets/cb737ba3-e6e7-4820-9e6a-f6d477cc9362) |
 
-1. Naviger inn i backend med `cd backend`.
-2. Kjør `npm install` for å installere avhengigheter for backend.
-3. Kjør `npm run dev` for å kjøre opp backend. Denne vil da starte opp på port 8080.
-4. Åpne en nettleser på `localhost:8080/api/tips` for å verifisere at backend kjører.
+## Getting Started
 
-### Kjøre opp frontend
+### First-Time Setup
 
-1. Åpne nytt terminalvindu og naviger til roten av repoet.
-2. Kjør `npm install` for å installere avhengigheter for frontend.
-3. Kjør `npm run dev`for å kjøre opp frontend. Den vil da starte opp på port 3000.
-4. Åpne nettleser på `localhost:3000` for å verifisere at frontend kjører.
-5. Hvis alt er satt opp riktig, så kan du også aksessere backend fra frontend på `localhost:3000/api/tips`. Dette er fordi vi har satt opp en proxy i viteconfigen som gjør at alle forespørseler til `/api` blir sendt til backend.
+1. Clone this repository to your local machine. Open a terminal, navigate to the folder where you want the repo, and run:  
+   ```bash
+   git clone git@github.com:bekk/labyrintenfinale-bekksparrow.git
 
-## Få ting ut i den store verden
+    Verify Node and npm are installed:
 
-Vi bruker Heroku for å hoste appen: https://bekksparrow-9ffe029a038a.herokuapp.com/.
+    npm --version
+    node --version
 
-For å dytte ting ut hit trenger dere bare å pushe til git, så fikser heroku pipeline resten. Om dere trenger å gjøre noen endringer i Heroku, kan dere ta kontakt med en av oss coacher!
+    If either command returns command not found, install them (e.g., via Homebrew). Ask a coach for help if needed.
+
+Running the Backend
+
+    Navigate into the backend folder:
+
+cd backend
+
+Install dependencies:
+
+npm install
+
+Start the backend:
+
+    npm run dev
+
+    Backend will run on port 8080.
+
+    Open a browser at http://localhost:8080/api/tips to verify the backend is running.
+
+Running the Frontend
+
+    Open a new terminal window and navigate to the root of the repo.
+
+    Install dependencies:
+
+npm install
+
+Start the frontend:
+
+    npm run dev
+
+    Frontend will run on port 3000.
+
+    Open a browser at http://localhost:3000 to verify the frontend is running.
+
+    You can access the backend from the frontend at http://localhost:3000/api/tips because a proxy in the Vite config forwards /api requests to the backend.
+
+Deploying to the World
+
+The app is hosted on Heroku: https://bekksparrow-9ffe029a038a.herokuapp.com/
+
+.
+
+To deploy, just push to Git. Heroku’s pipeline will handle the rest. For any changes on Heroku, contact one of the coaches.
